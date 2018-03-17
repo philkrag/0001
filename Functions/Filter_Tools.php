@@ -24,46 +24,18 @@
 // PAGE CREATED DATE: 2018-03-13
 
 // DATE   		|| NAME 					|| MODIFICATION
-// 2018-03-13 	|| Phillip Kraguljac 		|| Created.
+// 2018-03-18 	|| Phillip Kraguljac 		|| Created.
 
 // /////////////////////////////////////////////////////////////////////// VERSION CONTROL
 ?>
 
+
 <?php
 
-// PURPOSE: SETTING BASIC INPUT PAGES
-// AUTHOR: PHILLIP KRAGULJAC
-// CREATED: 2018-03-12
-
-function Get_Company_Name(){ ?>
-
-<?php // CONNECT TO MYSQL DATABASE
-
-$Server_Name = "localhost:3306";
-$User_Name = "admin";
-$Password = "password";
-$Database_Name = "User_Data_Collection";
-
-$MySQL_Connection = new mysqli($Server_Name, $User_Name, $Password, $Database_Name);
-if ($MySQL_Connection->connect_error) {die("Connection failed: " . $MySQL_Connection->connect_error);} 
+function Basic_Filter_Input($String_To_Be_Filtered){
+$Filtered_Item = "";
+$Filtered_Item = filter_var($String_To_Be_Filtered, FILTER_SANITIZE_STRING);
+return $Filtered_Item ;
+}
 
 ?>
-
-<?php // EXTRACT DATABASE DATA TO VARIABLE
-$MySQL_Command_Script = "SELECT * FROM `User_Configuration` WHERE `ID` = '1'";
-$Query_Result = $MySQL_Connection->query($MySQL_Command_Script);
-if ($Query_Result->num_rows > 0) {
-while($row = $Query_Result->fetch_assoc()) {
-$Company_Name = $row['Company Name'];
-}	
-} else {
-echo "!!!NO DETAILS!!!";
-}
-$MySQL_Connection->close();
-return $Company_Name;
-
-} ?>
-
-
-
-

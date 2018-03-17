@@ -14,7 +14,7 @@
 // GNU General Public License for more details.
 
 // You should have received a copy of the GNU General Public License
-// along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+// along with Pip-Project.  If not, see <http://www.gnu.org/licenses/>.
 
 // /////////////////////////////////////////////////////////////////////// COPYRIGHT NOTICE
 
@@ -27,11 +27,9 @@
 // 2018-03-13 	|| Phillip Kraguljac 		|| Released.
 
 // /////////////////////////////////////////////////////////////////////// VERSION CONTROL
-
 ?>
 
 <?php
-
 
 // PURPOSE: SETTING BASIC INPUT PAGES
 // AUTHOR: PHILLIP KRAGULJAC
@@ -195,23 +193,27 @@ $Table_Name = str_replace(" ","",$Table_Name);
 
 ?>
 
-
+<?php if($_SESSION['Logged_In_User']){ ?>
 <tr>
 <td class="Lower_Submit_Spacer_Cell"></td>
 <td class="Lower_Submit_Cell">Save changes to database.</td>
 <td class="Lower_Submit_Cell"><button class="Lower_Submit_Button" type="submit" value="Submit">Save</button></td>
 </tr>
+<?php } ?>
 
 </form>
 
+<?php if($_SESSION['Logged_In_User']){ ?>
 <tr>
 <td class="Lower_Submit_Spacer_Cell"></td>
 <td class="Lower_Submit_Cell">Reset all values to loaded.</td>
 <td class="Lower_Submit_Cell"><button class="Lower_Submit_Button" type="reset" value="Submit">Reset</button></td>
 </tr>
+<?php } ?>
 
 <form action="Functions/Database_Modify.php" method="post">
 
+<?php if($_SESSION['Logged_In_User']){ ?>
 <input type="hidden" name="Method" value="Delete">
 <input type="hidden" name="Table" value="<?php echo $Table_Name; ?>">
 <input type="hidden" name="ID" value="<?php echo $_GET['ID']; ?>">
@@ -221,6 +223,8 @@ $Table_Name = str_replace(" ","",$Table_Name);
 <td class="Lower_Submit_Cell">Delete this item.</td>
 <td class="Lower_Submit_Cell"><button class="Lower_Delete_Button" type="submit" value="Submit">Delete</button></td>
 </tr>
+<?php } ?>
+
 
 </form>
 
@@ -238,12 +242,17 @@ $Table_Name = str_replace(" ","",$Table_Name);
 <?php } ?>
 
 
-<?php function Insert_Input($Input_Name, $Current_Value){ ?>
+<?php // ADD INPUT => TEXT
+function Insert_Input($Input_Name, $Current_Value){
+if($_SESSION['Logged_In_User']){ ?>
 <input class="Inputs_Text" type="text" name="<?php echo $Input_Name; ?>" value="<?php echo $Current_Value; ?>">
-<?php } ?>
+<?php }else{ 
+echo $Current_Value;
+}} ?>
 
 <?php
 function File_Add_Button($Type, $Dashboard_Array){
+	if($_SESSION['Logged_In_User']){
 	switch ($Type) {
     case "WMS":
         $File_Path = "Files/WMS/";
@@ -257,7 +266,7 @@ if (file_exists($File_Path_Complete)) {?>
 <a href="<?php echo $File_Path_Complete; ?>">Open File</a>	
 <?php } else { ?>
     <input type="file" name="WMSUpload" id="WMSUpload">	
-<?php } } ?>
+	<?php }}} ?>
 
 
 

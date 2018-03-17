@@ -32,11 +32,9 @@
 
 <?php 
 
-
 // PURPOSE: EXTRACTING PAGE DETAILS
 // AUTHOR: PHILLIP KRAGULJAC
 // CREATED: 2018-03-12
-
 
 function Retrieve_Offset($Get_Data, $Dashboard_Indetifier){
 $Offset = 0;

@@ -14,7 +14,7 @@
 // GNU General Public License for more details.
 
 // You should have received a copy of the GNU General Public License
-// along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+// along with Pip-Project.  If not, see <http://www.gnu.org/licenses/>.
 
 // /////////////////////////////////////////////////////////////////////// COPYRIGHT NOTICE
 
@@ -27,10 +27,10 @@
 // 2018-03-13 	|| Phillip Kraguljac 		|| Released.
 
 // /////////////////////////////////////////////////////////////////////// VERSION CONTROL
-
 ?>
 
 <?php include $_SERVER['DOCUMENT_ROOT'].'/Functions/File_Uploads.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/Functions/Filter_Tools.php'; ?>
 
 
 <?php
@@ -45,7 +45,11 @@ if($Method=="Delete"){Delete_From_Database($_POST);}
 
 
 
-<?php // DATABASE CONNECTION FUNCTION
+<?php // CONNECT TO MYSQL DATABASE
+
+// PURPOSE: SAVING DATA TO THE DATABASE
+// AUTHOR: PHILLIP KRAGULJAC
+// CREATED: 2018-03-12
 
 function Save_To_Database(){
 
@@ -60,14 +64,14 @@ if ($MySQL_Connection->connect_error) {die("Connection failed: " . $MySQL_Connec
 ?>
 
 
-<?php // EXTRACT DATABASE DATA TO VARIABLE
+<?php // MODIFY MYSQL DATABASE
 
 $i = 0;
 
 $Input_Array['MySQL_Action'] = "UPDATE ";
-$Input_Array['MySQL_Table'] = $_POST['Table']." ";
+$Input_Array['MySQL_Table'] = Basic_Filter_Input($_POST['Table'])." ";
 $Input_Array['MySQL_Set'] = "SET ";
-$Input_Array['MySQL_Filter'] = "WHERE `ID` = ".$_POST['ID']." ";
+$Input_Array['MySQL_Filter'] = "WHERE `ID` = ".Basic_Filter_Input($_POST['ID'])." ";
 $Input_Array['MySQL_Order'] = "";
 $Input_Array['MySQL_Limit'] = "";
 $Input_Array['MySQL_Offset'] = "";
@@ -75,7 +79,7 @@ $Input_Array['MySQL_Offset'] = "";
 $Comma_Insert = "";
 foreach ($_POST as $key => $value) {
 if($key!="ID"&&$key!="Method"&&$key!="Table"){
-$Input_Array['MySQL_Set'] = $Input_Array['MySQL_Set'].$Comma_Insert." `".str_replace("_", " ", $key)."`='".str_replace("_", " ", $value)."'";
+$Input_Array['MySQL_Set'] = $Input_Array['MySQL_Set'].$Comma_Insert." `".str_replace("_", " ", $key)."`='".str_replace("_", " ", Basic_Filter_Input($value))."'";
 $Comma_Insert = ",";
 }
 }
@@ -101,7 +105,7 @@ echo "Error updating record: " . $MySQL_Connection->error;
 
 <?php
 
-$Upload_Array['ID'] = $_POST['ID'];
+$Upload_Array['ID'] = Basic_Filter_Input($_POST['ID']);
 $Upload_Array['Upload Directory'] = $_SERVER['DOCUMENT_ROOT']."/Files/WMS/";
 
 if($_FILES){
@@ -112,7 +116,7 @@ Upload_File($Upload_Array);
 <?php
 
 $MySQL_Connection->close();
-header('Location: ' . $_SERVER['HTTP_REFERER']."#".$_POST['Dashboard_Indetifier']);
+header('Location: ' . $_SERVER['HTTP_REFERER']."#".Basic_Filter_Input($_POST['Dashboard_Indetifier']));
 
 ?>
 
@@ -123,7 +127,11 @@ header('Location: ' . $_SERVER['HTTP_REFERER']."#".$_POST['Dashboard_Indetifier'
 
 
 
-<?php // DATABASE UPDATE FUNCTION
+<?php // CONNECT TO MYSQL DATABASE
+
+// PURPOSE: DELETING DATA FROM DATABASE
+// AUTHOR: PHILLIP KRAGULJAC
+// CREATED: 2018-03-12
 
 function Delete_From_Database(){
 
@@ -138,14 +146,14 @@ if ($MySQL_Connection->connect_error) {die("Connection failed: " . $MySQL_Connec
 ?>
 
 
-<?php // EXTRACT DATABASE DATA TO VARIABLE
+<?php // MODIFY MYSQL DATABASE
 
 $i = 0;
 
 $Input_Array['MySQL_Action'] = "UPDATE ";
-$Input_Array['MySQL_Table'] = $_POST['Table']." ";
+$Input_Array['MySQL_Table'] = Basic_Filter_Input($_POST['Table'])." ";
 $Input_Array['MySQL_Set'] = "SET `Deleted Date`='".date('Y-m-d')."' ";
-$Input_Array['MySQL_Filter'] = "WHERE `ID` = ".$_POST['ID']." ";
+$Input_Array['MySQL_Filter'] = "WHERE `ID` = ".Basic_Filter_Input($_POST['ID'])." ";
 $Input_Array['MySQL_Order'] = "";
 $Input_Array['MySQL_Limit'] = "";
 $Input_Array['MySQL_Offset'] = "";
@@ -172,7 +180,7 @@ echo "Error updating record: " . $MySQL_Connection->error;
 <?php
 
 $MySQL_Connection->close();
-header('Location: ' . $_SERVER['HTTP_REFERER']."#".$_POST['Dashboard_Indetifier']);
+header('Location: ' . $_SERVER['HTTP_REFERER']."#".Basic_Filter_Input($_POST['Dashboard_Indetifier']));
 
 ?>
 
@@ -184,7 +192,11 @@ header('Location: ' . $_SERVER['HTTP_REFERER']."#".$_POST['Dashboard_Indetifier'
 
 
 
-<?php // DATABASE UPDATE FUNCTION
+<?php // CONNECT TO MYSQL DATABASE
+
+// PURPOSE: CREATING NEW ENTRY IN DATABASE
+// AUTHOR: PHILLIP KRAGULJAC
+// CREATED: 2018-03-12
 
 function Create_In_Database(){
 
@@ -199,12 +211,12 @@ if ($MySQL_Connection->connect_error) {die("Connection failed: " . $MySQL_Connec
 ?>
 
 
-<?php // EXTRACT DATABASE DATA TO VARIABLE
+<?php // MODIFY MYSQL DATABASE
 
 $i = 0;
 
 $Input_Array['MySQL_Action'] = "INSERT INTO ";
-$Input_Array['MySQL_Table'] = $_POST['Table']." ";
+$Input_Array['MySQL_Table'] = Basic_Filter_Input($_POST['Table'])." ";
 $Input_Array['MySQL_Set'] = "(`Last Modified Date`) VALUES ('".date('Y-m-d')."') ";
 $Input_Array['MySQL_Filter'] = "";
 $Input_Array['MySQL_Order'] = "";
@@ -233,7 +245,7 @@ echo "Error updating record: " . $MySQL_Connection->error;
 <?php
 
 $MySQL_Connection->close();
-header('Location: ' . $_SERVER['HTTP_REFERER']."#".$_POST['Dashboard_Indetifier']);
+header('Location: ' . $_SERVER['HTTP_REFERER']."#".Basic_Filter_Input($_POST['Dashboard_Indetifier']));
 
 ?>
 
