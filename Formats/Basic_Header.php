@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 
 <!--
-
 // /////////////////////////////////////////////////////////////////////// COPYRIGHT NOTICE
 
 This file is part of Pip-Project Portal.
@@ -19,10 +18,9 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.
 
 You should have received a copy of the GNU General Public License
-along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+along with Pip-Project.  If not, see <http://www.gnu.org/licenses/>.
 
 // /////////////////////////////////////////////////////////////////////// COPYRIGHT NOTICE
-
 -->
 
 <?php include $_SERVER['DOCUMENT_ROOT'].'/Functions/Configuration_Display.php'; ?>
@@ -33,13 +31,13 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 
 <link rel="stylesheet" type="text/css" href="Site_Style.css">
 <?php include $_SERVER['DOCUMENT_ROOT'].'/Functions/Page_Navigation.php'; ?>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/Functions/Clock_JavaScript.php'; ?>
 
 </head>
 <body>
 
+<?php include $_SERVER['DOCUMENT_ROOT'].'/Functions/Filter_Tools.php'; ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/Functions/Dashboard_Display.php'; ?>
-<?php include $_SERVER['DOCUMENT_ROOT'].'/Functions/Resource_0002.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/Functions/Dashboard_Tools.php'; ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/Functions/Input_Display.php'; ?>
 
 
@@ -64,7 +62,6 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 <table class="Tool_Table">
 <col width="100px">
 <col width="80px">
-<col width="80px">
 <col width="*">
 <col width="80px">
 <col width="80px">
@@ -73,7 +70,6 @@ along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 <tr>
 <td class="Tool_Spacer_Cell"></td>
 <td class="Tool_Cell"><button class="Tool_Button" onclick="window.location.href='Index.php'">Home</button></td>
-<td class="Tool_Cell"><button class="Tool_Button" onclick="'">Log Out</button></td>
 
 <td class="Tool_Spacer_Cell"></td>
 <td class="Tool_Cell"><button class="Tool_Button" onclick="goBack()">Back</button></td>

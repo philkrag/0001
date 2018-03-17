@@ -14,7 +14,7 @@
 // GNU General Public License for more details.
 
 // You should have received a copy of the GNU General Public License
-// along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+// along with Pip-Project.  If not, see <http://www.gnu.org/licenses/>.
 
 // /////////////////////////////////////////////////////////////////////// COPYRIGHT NOTICE
 
@@ -27,7 +27,6 @@
 // 2018-03-13 	|| Phillip Kraguljac 		|| Released.
 
 // /////////////////////////////////////////////////////////////////////// VERSION CONTROL
-
 ?>
 
 <?php
@@ -35,7 +34,6 @@
 // PURPOSE: SETTING BASIC DASHBOARDS
 // AUTHOR: PHILLIP KRAGULJAC
 // CREATED: 2018-03-12
-
 
 function Display_Dashboard_Basic($Dashboard_Array){ ?>
 	
@@ -64,11 +62,11 @@ $i = 0;
 WHERE `TABLE_SCHEMA`='{$Database_Name}' 
     AND `TABLE_NAME`='{$Table_Name}';";
 
-$result = $MySQL_Connection->query($MySQL_Command_Script);
+$MySQL_Result = $MySQL_Connection->query($MySQL_Command_Script);
 
-if ($result->num_rows > 0) {
+if ($MySQL_Result->num_rows > 0) {
 
-    while($row = $result->fetch_assoc()) {
+    while($row = $MySQL_Result->fetch_assoc()) {
 		$Column_Data[$i]['Name'] = $row['COLUMN_NAME'];
 		$Column_Data[$i]['Type'] = $row['DATA_TYPE'];
 		$i = $i + 1;
@@ -103,11 +101,11 @@ $Dashboard_Array['MySQL_Order'].
 $Dashboard_Array['MySQL_Limit'].
 $Dashboard_Array['MySQL_Offset'];
 
-$result = $MySQL_Connection->query($MySQL_Command_Script);
+$MySQL_Result = $MySQL_Connection->query($MySQL_Command_Script);
 
-if ($result->num_rows > 0) {
+if ($MySQL_Result->num_rows > 0) {
 
-while($row = $result->fetch_assoc()) {
+while($row = $MySQL_Result->fetch_assoc()) {
 
 for ($x = 0; $x < count($Column_Data); $x++) {
 $Extracted_Data[$i][$Column_Data[$x]['Name']] = $row[$Column_Data[$x]['Name']];
@@ -134,7 +132,7 @@ echo "0 results";
 	
 	
 	
-	
+	<?php if($_SESSION['Logged_In_User']){ ?>
 <form action="Functions/Database_Modify.php" method="post">
 	
 <table class="Upper_Submit_Table" id="<?php echo $Dashboard_Array['Dashboard_Indetifier']; ?>">
@@ -165,7 +163,7 @@ $Table_Name = str_replace(" ","",$Table_Name);
 </table>
 
 </form>
-
+<?php } ?>
 	
 	
 	

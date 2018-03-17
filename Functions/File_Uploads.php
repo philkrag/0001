@@ -32,6 +32,10 @@
 
 <?php
 
+// PURPOSE: UPLOADING FILES ONTO SERVER
+// AUTHOR: PHILLIP KRAGULJAC
+// CREATED: 2018-03-12
+
 function Upload_File($Upload_Array){
 
 $Target_File = $Upload_Array['Upload Directory'] ."[".$Upload_Array['ID']."].pdf";
