@@ -66,7 +66,7 @@
 <td class="Footer_Spacer_Cell"></td>
 <td class="Footer_Privacy_Cell"><a href="Privacy\Privacy.txt">Privacy</a></td>
 <td class="Footer_Terms_Cell"><a href="Terms\Terms and Conditions.txt">Terms and Conditions</a></td>
-<td class="Footer_Icon_Cell"><a href="Copyright\GNU License.txt"><img src="Images\Logos\GPLv3-88x31.png" alt=""></a></td>
+<td class="Footer_Icon_Cell"><a href="LICENSE.txt"><img src="Images\Logos\GPLv3-88x31.png" alt=""></a></td>
 
 </tr>
 
