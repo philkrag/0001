@@ -1,0 +1,107 @@
+/*
+// /////////////////////////////////////////////////////////////////////// COPYRIGHT NOTICE
+
+// This file is part of Pip-Project Portal.
+
+// Pip-Project Portal is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+
+// Pip-Project Portal is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+
+// /////////////////////////////////////////////////////////////////////// COPYRIGHT NOTICE
+*/
+
+body { font-family: Arial, Helvetica, sans-serif; font-size: 13px; }
+
+.Header_Table { width:100%; background-color:#e69900; }
+.Header_Row {  }
+.Header_Logo_Cell { text-align: center; }
+.Header_Title_Cell { color:#ffffff; font-size: 40px; font-weight: bold; }
+.Header_Credential_Cell { }
+
+
+.Content_Table { width:100%; background-color:DarkGrey; min-height:800px;}
+.Left_Content_Cell { background-color:#cccccc; vertical-align:top; text-align:center;}
+.Main_Content_Cell { background-color:#ffffff; vertical-align:top;}
+.Right_Content_Cell { background-color:#cccccc; vertical-align:top;}
+
+
+.Footer_Table { width:100%; background-color:DarkGrey; }
+.Footer_Spacer_Cell {  }
+.Footer_Copyright_Cell { background-color:#ffffff; text-align:center; }
+.Footer_Privacy_Cell { background-color:#f2f2f2; text-align:center; }
+.Footer_Terms_Cell { background-color:#f2f2f2; text-align:center; }
+.Footer_Span { color:#ffffff; text-align:right; }
+.Footer_Icon_Cell { background-color:#ffffff; text-align:center; }
+.Footer_Icon { max-height:50px; max-width:70px;}
+
+.Left_Content_Icon { max-width:90px; min-height:20px; }
+
+
+
+.Index_Table { width:100%; background-color:#ffffff; }
+.Index_Heading_Cell { background-color:#cccccc; color:#ffffff; font-weight: bold; }
+.Index_Icon_Cell { background-color:#f2f2f2; text-align:center; }
+.Index_Link_Cell { background-color:#f2f2f2; }
+.Index_Information_Cell { background-color:#f2f2f2; }
+
+.User_Login_Table { width:100%; background-color:#f2f2f2; border: 1px solid black;}
+.User_Login_Button_Cell { background-color:#f2f2f2; vertical-align:Top;}
+.User_Login_Label_Cell { background-color:#d9d9d9; }
+.User_Login_Value_Cell { background-color:#f2f2f2; }
+.User_Login_Icon_Cell { background-color:#b3b3b3; }
+.User_Login_Spacer_Cell { background-color:#b3b3b3; }
+
+
+.Dashboard_Table { width:100%; background-color:#ffffff; }
+.Dashboard_Heading_Cell { background-color:#b3b3b3; color:#ffffff; font-weight: bold; }
+.Dashboard_SubHeading_Cell { background-color:#cccccc; font-weight: bold; }
+.Dashboard_Button_Cell { background-color:#f2f2f2; vertical-align:Top;}
+.Dashboard_Label_Cell { background-color:#d9d9d9; }
+.Dashboard_Value_Cell { background-color:#f2f2f2; }
+.Dashboard_Footnote_Cell { background-color:#ffffff; }
+.Dashboard_Spacer_Cell { background-color:#ffffff; }
+.Dashboard_Button { width:100%; }
+
+
+.Input_Table { width:100%; background-color:#ffffff; }
+.Input_Heading_Cell { background-color:#b3b3b3; color:#ffffff; font-weight: bold; }
+.Input_Label_Cell { background-color:#d9d9d9; }
+.Input_Value_Cell { background-color:#f2f2f2; }
+.Input_Spacer_Cell {  }
+.Inputs_Text { width:99%; }
+
+
+.Tool_Table { width:100%; background-color:DarkGrey; }
+.Tool_Cell { }
+.Tool_Spacer_Cell {  }
+.Tool_Button_Cell {  }
+.Tool_Button { width:100%; }
+
+
+.Upper_Warning_Cell {background-color:White; text-align:center;}
+
+.Upper_Submit_Table { width:100%; background-color:White; }
+.Upper_Submit_Cell { background-color:White; }
+.Upper_Submit_Spacer_Cell { background-color:White; }
+.Upper_Submit_Button { width:100%; }
+
+
+.Lower_Submit_Table { width:100%; background-color:White; }
+.Lower_Submit_Cell { background-color:White; text-align:Right;}
+.Lower_Submit_Spacer_Cell { background-color:White; }
+.Lower_Submit_Button { width:100%; }
+.Lower_Delete_Button { width:100%; background-color:Red; color: #ffffff;}
+
+
+
+
+/* PROGRAMMING BASED IN CSS ANIMATION EXAMPLES --- https://cssanimation.rocks/clocks/*/
