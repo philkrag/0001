@@ -37,9 +37,9 @@
 
 $Method = ""; if(isset($_POST['Method'])){$Method=$_POST['Method'];}
 
-if($Method=="Save"){Save_To_Database($_POST);}
-if($Method=="New"){Create_In_Database($_POST);}
-if($Method=="Delete"){Delete_From_Database($_POST);}
+if($Method=="Save"){Save_To_Database();}
+if($Method=="New"){Create_In_Database();}
+if($Method=="Delete"){Delete_From_Database();}
 
 ?>
 
@@ -56,7 +56,7 @@ function Save_To_Database(){
 $Server_Name = "localhost:3306";
 $User_Name = "admin";
 $Password = "password";
-$Database_Name = "User_Data_Collection";
+$Database_Name = Return_Database($_POST['Table']);
 
 $MySQL_Connection = new mysqli($Server_Name, $User_Name, $Password, $Database_Name);
 if ($MySQL_Connection->connect_error) {die("Connection failed: " . $MySQL_Connection->connect_error);} 
@@ -66,22 +66,32 @@ if ($MySQL_Connection->connect_error) {die("Connection failed: " . $MySQL_Connec
 
 <?php // MODIFY MYSQL DATABASE
 
+$Table = ""; if(isset($_POST['Table'])){$Table = Basic_Filter_Input($_POST['Table']);}
+$ID = ""; if(isset($_POST['ID'])){$ID = Basic_Filter_Input($_POST['ID']);}
+$Dashboard_Indetifier = ""; if(isset($_POST['Dashboard_Indetifier'])){$Dashboard_Indetifier = Basic_Filter_Input($_POST['Dashboard_Indetifier']);}
+
+
 $i = 0;
 
 $Input_Array['MySQL_Action'] = "UPDATE ";
 $Input_Array['MySQL_Table'] = Basic_Filter_Input($_POST['Table'])." ";
 $Input_Array['MySQL_Set'] = "SET ";
-$Input_Array['MySQL_Filter'] = "WHERE `ID` = ".Basic_Filter_Input($_POST['ID'])." ";
+$Input_Array['MySQL_Filter'] = "WHERE `ID` = ".$ID." ";
 $Input_Array['MySQL_Order'] = "";
 $Input_Array['MySQL_Limit'] = "";
 $Input_Array['MySQL_Offset'] = "";
 
 $Comma_Insert = "";
 foreach ($_POST as $key => $value) {
-if($key!="ID"&&$key!="Method"&&$key!="Table"){
+if($key!="ID" && $key!="Method" && $key!="Table" && $key!="Last_Modified_Date"){
 $Input_Array['MySQL_Set'] = $Input_Array['MySQL_Set'].$Comma_Insert." `".str_replace("_", " ", $key)."`='".str_replace("_", " ", Basic_Filter_Input($value))."'";
 $Comma_Insert = ",";
 }
+
+if($key=="Last_Modified_Date"){
+$Input_Array['MySQL_Set'] = $Input_Array['MySQL_Set'].", `Last Modified Date`='".date("Y-m-d")."'";
+}
+
 }
 $Input_Array['MySQL_Set'] = $Input_Array['MySQL_Set']." ";
 
@@ -105,18 +115,15 @@ echo "Error updating record: " . $MySQL_Connection->error;
 
 <?php
 
-$Upload_Array['ID'] = Basic_Filter_Input($_POST['ID']);
-$Upload_Array['Upload Directory'] = $_SERVER['DOCUMENT_ROOT']."/Files/WMS/";
+$Upload_Array['ID'] = $ID;
+if($_FILES){Upload_File($Upload_Array);}
 
-if($_FILES){
-Upload_File($Upload_Array);
-}
 ?>
 
 <?php
 
 $MySQL_Connection->close();
-header('Location: ' . $_SERVER['HTTP_REFERER']."#".Basic_Filter_Input($_POST['Dashboard_Indetifier']));
+header('Location: ' . $_SERVER['HTTP_REFERER']."#".$Dashboard_Indetifier);
 
 ?>
 
@@ -138,7 +145,7 @@ function Delete_From_Database(){
 $Server_Name = "localhost:3306";
 $User_Name = "admin";
 $Password = "password";
-$Database_Name = "User_Data_Collection";
+$Database_Name = Return_Database($_POST['Table']);
 
 $MySQL_Connection = new mysqli($Server_Name, $User_Name, $Password, $Database_Name);
 if ($MySQL_Connection->connect_error) {die("Connection failed: " . $MySQL_Connection->connect_error);} 
@@ -203,10 +210,32 @@ function Create_In_Database(){
 $Server_Name = "localhost:3306";
 $User_Name = "admin";
 $Password = "password";
-$Database_Name = "User_Data_Collection";
+$Database_Name = Return_Database($_POST['Table']);
 
 $MySQL_Connection = new mysqli($Server_Name, $User_Name, $Password, $Database_Name);
 if ($MySQL_Connection->connect_error) {die("Connection failed: " . $MySQL_Connection->connect_error);} 
+
+?>
+
+
+<?php // CROSS LINKING INJECTION
+
+// PURPOSE: CROSS LINKING OF ITEMS BETWEEN TABLES
+// AUTHOR: PHILLIP KRAGULJAC
+// CREATED: 2018-03-19
+
+$Inset_Column = "";
+$Inset_Value = "";
+
+var_dump($_POST);
+
+foreach ($_POST as $key => $value){
+	if(substr($key, -2)=="ID" && strlen($key)>2){		
+	$Inset_Column = $Inset_Column. ", `".str_replace("_", " ", $key)."`";
+	$Inset_Value = $Inset_Value. ", '".$value."'";
+	echo $Inset_Column;
+}
+}
 
 ?>
 
@@ -217,7 +246,7 @@ $i = 0;
 
 $Input_Array['MySQL_Action'] = "INSERT INTO ";
 $Input_Array['MySQL_Table'] = Basic_Filter_Input($_POST['Table'])." ";
-$Input_Array['MySQL_Set'] = "(`Last Modified Date`) VALUES ('".date('Y-m-d')."') ";
+$Input_Array['MySQL_Set'] = "(`Last Modified Date`{$Inset_Column}) VALUES ('".date('Y-m-d')."'{$Inset_Value}) ";
 $Input_Array['MySQL_Filter'] = "";
 $Input_Array['MySQL_Order'] = "";
 $Input_Array['MySQL_Limit'] = "";
@@ -252,6 +281,16 @@ header('Location: ' . $_SERVER['HTTP_REFERER']."#".Basic_Filter_Input($_POST['Da
 <?php } ?>
 
 
+
+<?php // THE FOLLOWING DETERMINES WHICH DATABASE TO DRAW THE DATA FROM
+function Return_Database($From_Statement){
+	$Required_Datebase = "User_Data_Collection";
+	if(
+	$From_Statement=="User_Configuration" || 
+	$From_Statement=="User_Details"
+	){$Required_Datebase = "User_Configuration";}
+	return $Required_Datebase;
+} ?>
 
 
 

@@ -1,0 +1,40 @@
+
+
+VERSION 1.2
+IMPROVEMENTS:
+=> Removed '0 Results' string @ dashboard empty display.
+=> Created Dashboard v1.1.
+=> Cross linking between tables native to dashboard new function.
+=> Updated all dashboards to v1.1.
+=> Added day change highlight.
+=> Changed Dashboard Edit button to View.
+=> Updated all dashboards to v1.2.
+=> Database updated for v1.2 changes.
+=> Database updated for v1.3 changes.
+=> Warning Page added.
+=> Overdue Page added.
+=> Included switch for adding new items.
+=> Expanded Index Menu.
+=> Added fast link for table cross linking.
+=> Added Dashboard thumbnails.
+=> Database updated for v1.4 changes.
+=> Added Photo functionality within Item display.
+=> Added page access authentication.
+=> Added heading icons.
+=> Added input controls.
+=> Updated various inputs to match mysql column add-ins.
+=> Added report functionality.
+=> Added Basic Report Table v1.0
+=> Added Basic Report Item v1.0
+=> Update all Report Table Displays to v1.1
+=> Added Basic Menu functionality v1.0 
+=> Added additional input types.
+
+
+FIXES:
+=> Undefined index: [Session User Name] 
+=> Undefined index: [MySQL Column Name] in /var/www/html/Functions/Dashboard_Display.php
+=> Fixed dashboard page issue - appears to be linked session error.
+=> Error with Dashboard page turning with inputs - mainly with ID Get data.
+=> Dashboard bookmarking @ new item insert.
+=> Fixed $Dashboard_Array['Dashboard_Inde>n<tifier'] typo.

@@ -55,24 +55,18 @@
 
 <table class="Footer_Table">
 <col width="*">
-<col width="120px">
-<col width="120px">
-<col width="120px">
-<col width="80px">
-<col width="80px">
-<col width="80px">
-<col width="80px">
+<col width="100px">
+<col width="60px">
 
 <tr>
 <td class="Footer_Spacer_Cell"></td>
-<td class="Footer_Privacy_Cell"><a href="Privacy\Privacy.txt">Privacy</a></td>
-<td class="Footer_Terms_Cell"><a href="Terms\Terms and Conditions.txt">Terms and Conditions</a></td>
-<td class="Footer_Icon_Cell"><a href="Copyright\GNU License.txt"><img src="Images\Logos\GPLv3-88x31.png" alt=""></a></td>
+<td class="Footer_Icon_Cell"><a href="LICENSE.txt"><img src="Images\Logos\GPLv3.png" height="30px" alt=""></a></td>
+<td class="Footer_Icon_Cell"><a href=""><img src="Images\Logos\(PIP) 354x217.png" height="30px" alt=""></a></td>
 
 </tr>
 
 <tr>
-<td class="Footer_Span" colspan="6">© Phillip Kraguljac - Pip Projects</td>
+<td class="Footer_Span" colspan="6">© (2018) Phillip Kraguljac - Pip Projects</td>
 
 </tr>
 

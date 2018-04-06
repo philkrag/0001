@@ -42,7 +42,7 @@ function Get_Company_Name(){ ?>
 $Server_Name = "localhost:3306";
 $User_Name = "admin";
 $Password = "password";
-$Database_Name = "User_Data_Collection";
+$Database_Name = "User_Configuration";
 
 $MySQL_Connection = new mysqli($Server_Name, $User_Name, $Password, $Database_Name);
 if ($MySQL_Connection->connect_error) {die("Connection failed: " . $MySQL_Connection->connect_error);} 
