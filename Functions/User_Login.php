@@ -34,6 +34,8 @@ along with Pip-Project.  If not, see <http://www.gnu.org/licenses/>.
 // /////////////////////////////////////////////////////////////////////// VERSION CONTROL
 ?>
 
+<?php include $_SERVER['DOCUMENT_ROOT'].'/Functions/Filter_Tools.php'; ?>
+
 <?php // DATABASE CONNECTION FUNCTION
 
 $Server_Name = "localhost:3306";
