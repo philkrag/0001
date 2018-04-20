@@ -38,59 +38,132 @@
 
 function Upload_File($Upload_Array){
 
-$Target_File = $Upload_Array['Upload Directory'] ."[".$Upload_Array['ID']."].pdf";
+	Upload_PDF_Document("WMS_PDFs", $Upload_Array['ID']);	
+	Upload_PDF_Document("MSDS_PDFs", $Upload_Array['ID']);
+	Upload_PDF_Document("Quote_PDFs", $Upload_Array['ID']);
+	Upload_PDF_Document("Purchase_Request_PDFs", $Upload_Array['ID']);
+	Upload_PDF_Document("Purchase_Order_PDFs", $Upload_Array['ID']);
+	Upload_PDF_Document("Tax_Invoice_PDFs", $Upload_Array['ID']);
+	
+	
+	Upload_Image_File("User_Logos", $Upload_Array['ID']);
+	Upload_Image_File("Equipment_Register_Photos", $Upload_Array['ID']);
+	Upload_Image_File("Task_Record_Photos", $Upload_Array['ID']);
+	Upload_Image_File("Project_Register_Photos", $Upload_Array['ID']);
+}
+
+
+
+// THE FOLLOWING IS A GENERIC PDF UPLOAD FUNCTION
+function Upload_PDF_Document($File_Type, $ID){
+if(isset($_FILES[$File_Type])){
+
+$Target_File = "../Files/".$File_Type."/"."[".$ID."].pdf";
+echo "<br>".$Target_File."<br>";
 
 echo $Target_File;
 $Upload_OK_Flag = 1;
 $Image_File_Type = strtolower(pathinfo($Target_File,PATHINFO_EXTENSION));
-// Check if image file is a actual image or fake image
+
 if(isset($_POST["submit"])) {
-    $check = getimagesize($_FILES["WMSUpload"]["tmp_name"]);
-    if($check !== false) {
-        echo "File is an image - " . $check["mime"] . ".";
-        $Upload_OK_Flag = 1;
-    } else {
-        echo "File is not an image.";
-        $Upload_OK_Flag = 0;
-    }
+$check = getimagesize($_FILES[$File_Type]["tmp_name"]);
+if($check !== false) {
+echo "File is an image - " . $check["mime"] . ".";
+$Upload_OK_Flag = 1;
+} else {
+echo "<br>File is not an image.";
+$Upload_OK_Flag = 0;
+}
 }
 
-// Check if file already exists
 if (file_exists($Target_File)) {
-    echo "Sorry, file already exists.";
-    $Upload_OK_Flag = 0;
+echo "<br>Sorry, file already exists.";
+$Upload_OK_Flag = 0;
 }
 
-// Check file size
-if ($_FILES["WMSUpload"]["size"] > 500000) {
-    echo "Sorry, your file is too large.";
-    $Upload_OK_Flag = 0;
+if ($_FILES[$File_Type]["size"] > 500000) {
+echo "<br>Sorry, your file is too large.";
+$Upload_OK_Flag = 0;
 }
 
-
-// Allow certain file formats
 // if($Image_File_Type != "jpg" && $Image_File_Type != "png" && $Image_File_Type != "jpeg"
 // && $Image_File_Type != "gif" ) {
-    // echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
-    // $Upload_OK_Flag = 0;
+// echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+// $Upload_OK_Flag = 0;
 // }
 
-// Check if $Upload_OK_Flag is set to 0 by an error
 if ($Upload_OK_Flag == 0) {
-    echo "Sorry, your file was not uploaded.";
-// if everything is ok, try to upload file
+echo "<br>Sorry, your file was not uploaded.";
+
 } else {
-    if (move_uploaded_file($_FILES["WMSUpload"]["tmp_name"], $Target_File)) {
-        echo "The file ". basename( $_FILES["WMSUpload"]["name"]). " has been uploaded.";
-    } else {
-        echo "Sorry, there was an error uploading your file.";
-    }
+if (move_uploaded_file($_FILES[$File_Type]["tmp_name"], $Target_File)) {
+echo "<br>The file ". basename( $_FILES[$File_Type]["name"]). " has been uploaded.";
+} else {
+echo "Sorry, there was an error uploading your file.";
+}
+}
+}
 }
 
 
 
 
+// THE FOLLOWING IS
+function Upload_Image_File($File_Type, $ID){
+if(isset($_FILES[$File_Type])){
+
+$Target_File = "../Files/".$File_Type."/"."[".$ID."].jpg";
+echo "<br>".$Target_File."<br>";
+
+echo $Target_File;
+$Upload_OK_Flag = 1;
+$Image_File_Type = strtolower(pathinfo($Target_File,PATHINFO_EXTENSION));
+
+if(isset($_POST["submit"])) {
+$check = getimagesize($_FILES[$File_Type]["tmp_name"]);
+if($check !== false) {
+echo "<br>File is an image - " . $check["mime"] . ".";
+$Upload_OK_Flag = 1;
+} else {
+echo "<br>File is not an image.";
+$Upload_OK_Flag = 0;
 }
+}
+
+if (file_exists($Target_File)) {
+if (!unlink($Target_File))
+  {
+  echo ("<br>Error while deleting existing file.");
+  }
+else
+  {
+  echo ("<br>Existing file deleted.");
+  }
+}
+
+if ($_FILES[$File_Type]["size"] > 500000) {
+echo "<br>Sorry, your file is too large.";
+$Upload_OK_Flag = 0;
+}
+
+//if($Image_File_Type != "jpg" && $Image_File_Type != "png" && $Image_File_Type != "jpeg" && $Image_File_Type != "gif" ) {
+if($Image_File_Type != "jpg" && $Image_File_Type != "png") {
+echo "<br>Sorry, only JPG, & PNG files are allowed.";
+$Upload_OK_Flag = 0;
+}
+
+if ($Upload_OK_Flag == 0) {
+echo "<br>Sorry, your file was not uploaded.";
+
+} else {
+if (move_uploaded_file($_FILES[$File_Type]["tmp_name"], $Target_File)) {
+echo "<br>The file ". basename( $_FILES[$File_Type]["name"]). " has been uploaded.";
+} else {
+echo "<br>Sorry, there was an error uploading your file.";
+}
+}
+}
+	}
 
 
 

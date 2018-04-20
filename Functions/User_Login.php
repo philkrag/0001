@@ -40,7 +40,7 @@ along with Pip-Project.  If not, see <http://www.gnu.org/licenses/>.
 $Server_Name = "localhost:3306";
 $User_Name = "admin";
 $Password = "password";
-$Database_Name = "User_Data_Collection";
+$Database_Name = "User_Configuration";
 
 $MySQL_Connection = new mysqli($Server_Name, $User_Name, $Password, $Database_Name);
 // if ($MySQL_Connection->connect_error) {die("Connection failed: " . $MySQL_Connection->connect_error);} 
@@ -53,6 +53,8 @@ $MySQL_Connection = new mysqli($Server_Name, $User_Name, $Password, $Database_Na
 $Username_Match = null;
 $Username_And_Password_Match = null;
 $Username_Logout = null;
+
+$_SESSION['Adjust_Inputs'] = "No";
 
 //echo $_POST['Mode']."<br>";
 
@@ -84,9 +86,22 @@ $Username_Match = false;
 
 $MySQL_Command_Script = "SELECT * FROM `User_Details` WHERE `User Name`='{$Site_User_Name}' and `Password`='".md5($Password)."'";
 $MySQL_Result = $MySQL_Connection->query($MySQL_Command_Script);
-$Count_Entries = mysqli_num_rows($MySQL_Result);
+//$Count_Entries = mysqli_num_rows($MySQL_Result);
 
-if($Count_Entries == 1){	
+
+$Entry_Detected = false;
+while($row = $MySQL_Result->fetch_assoc()) {
+	$_SESSION['Adjust_Inputs'] = $row['Adjust Inputs?'];
+	$_SESSION['Display_Connectivity'] = $row['Display Connectivity?'];
+	
+	
+	$Entry_Detected = true;
+}
+
+
+
+//if($Count_Entries == 1){	
+if($Entry_Detected == true){	
 $_SESSION['Logged_In_User'] = $Site_User_Name;
 echo "User and password matched.<br>";
 echo "User has been logged in.<br>";
@@ -160,6 +175,7 @@ echo "Error updating record: " .$MySQL_Connection->error."<br>";
 <?php
 
 $MySQL_Connection->close();
-header('Location: ' . $_SERVER['HTTP_REFERER']."#".$_POST['Dashboard_Indetifier']);
+$Dashboard_Indetifier = ""; if(isset($_POST['Dashboard_Indetifier'])){$Dashboard_Indetifier = $_POST['Dashboard_Indetifier'];}
+header('Location: ' . $_SERVER['HTTP_REFERER']."#".$Dashboard_Indetifier);
 
 ?>

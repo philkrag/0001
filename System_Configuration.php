@@ -14,7 +14,7 @@
 // GNU General Public License for more details.
 
 // You should have received a copy of the GNU General Public License
-// along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+// along with Pip-Project.  If not, see <http://www.gnu.org/licenses/>.
 
 // /////////////////////////////////////////////////////////////////////// COPYRIGHT NOTICE
 
@@ -27,7 +27,6 @@
 // 2018-03-13 	|| Phillip Kraguljac 		|| Released.
 
 // /////////////////////////////////////////////////////////////////////// VERSION CONTROL
-
 ?>
 
 
@@ -43,7 +42,7 @@ $ID=1;
 <?php // BASIC INPUT V1.0
 
 $Input_Array['Title'] = "SYSTEM CONFIGURATION";
-$Input_Array['Dashboard_Indetifier'] = "";
+$Input_Array['Dashboard_Indetifier'] = "I001";
 $Input_Array['ID'] = $ID;
 
 $Input_Array['Column_Headings'] = array("ID", "Company Name");
@@ -60,6 +59,9 @@ $Input_Array['MySQL_Offset'] = "";
 Display_Input_Basic($Input_Array); // <<< RESOURCE 0001
 
 ?>
+
+
+<?php Display_Item_Page_Legend(); ?>
 
 
 <?php include $_SERVER['DOCUMENT_ROOT'].'/Formats/Basic_Footer.php'; ?>

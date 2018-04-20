@@ -1,4 +1,6 @@
 <?php session_start(); ?>
+<?php if($_SERVER['PHP_SELF']!="/Login.php"){include $_SERVER['DOCUMENT_ROOT'].'/Functions/User_Authentication.php';} ?>
+<?php if(!isset($_SESSION['Logged_In_User'])){$_SESSION['Logged_In_User']=null;} ?>
 
 <!DOCTYPE html>
 
@@ -35,11 +37,15 @@ along with Pip-Project.  If not, see <http://www.gnu.org/licenses/>.
 </head>
 <body>
 
+<?php include $_SERVER['DOCUMENT_ROOT'].'/Functions/Database_Selection.php'; ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/Functions/Filter_Tools.php'; ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/Functions/Dashboard_Display.php'; ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/Functions/Dashboard_Tools.php'; ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/Functions/Input_Display.php'; ?>
-
+<?php include $_SERVER['DOCUMENT_ROOT'].'/Functions/Input_Tools.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/Functions/Menu_Display.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/Functions/Combobox_Tools.php'; ?>
+<?php include $_SERVER['DOCUMENT_ROOT'].'/Functions/Legend_Display.php'; ?>
 
 <table class="Header_Table">
 <col width="250px">
@@ -47,7 +53,22 @@ along with Pip-Project.  If not, see <http://www.gnu.org/licenses/>.
 <col width="30%">
 
 <tr class="Header_Row">
-<td class="Header_Logo_Cell"><img src="Images\Logos\User Logo.png" style="max-width:120px;" alt=""></td>
+<?php 
+
+$Image_Found = false;
+if(file_exists('Files/User_Logos/[1].jpg')){$Image_Inset = "Files/User_Logos/[1].jpg"; $Image_Found = true;}
+if(file_exists('Files/User_Logos/[1].png')){$Image_Inset = "Files/User_Logos/[1].png"; $Image_Found = true;}
+
+ ?>
+ 
+ <?php if($Image_Found == true){ ?>
+<td class="Header_Logo_Cell"><img src="<?php echo $Image_Inset; ?>" style="max-width:120px;" alt=""></td>
+<?php } ?>
+
+<?php if($Image_Found == false){ ?>
+<td class="Header_Logo_Cell"></td>
+<?php } ?>
+
 <td class="Header_Title_Cell"><?php echo Get_Company_Name(); ?></td>
 <td class="Header_Credential_Cell">
 
