@@ -182,20 +182,21 @@ return $Return_String;
 // PURPOSE: EXTRACT ADDITIONAL INFORMATION ENTRIES
 // AUTHOR: PHILLIP KRAGULJAC
 // CREATED: 2018-04-20
+// MODIFIED: 2018-05-22
 
-function Get_Info_Data_If_Available($Table_Name, $Input_Name){
+function Get_Info_Data_If_Available($System_Table_Name, $User_Table_Name, $Input_Name){
 $Combobox_Data = null;
 
 $Server_Name = "localhost:3306";
 $User_Name = "admin";
-$Password = "password";
+$Password = "admin";
 $Database_Name = "System_Configuration";
 
 $MySQL_Connection = new mysqli($Server_Name, $User_Name, $Password, $Database_Name);
 if ($MySQL_Connection->connect_error) {die("Connection failed: " . $MySQL_Connection->connect_error);} 
 
 $i = 0;
-$MySQL_Command_Script = "SELECT * FROM Input_Information WHERE `Table` = '{$Table_Name}' AND `Element` = '{$Input_Name}'";
+$MySQL_Command_Script = "SELECT * FROM {$System_Table_Name} WHERE `Table` = '{$User_Table_Name}' AND `Element` = '{$Input_Name}'";
 $result = $MySQL_Connection->query($MySQL_Command_Script);
 
 if ($result->num_rows > 0) {
@@ -213,26 +214,26 @@ return $Combobox_Data;
 ?>
 
 
-
 <?php 
 
 // PURPOSE: DISPLAY INFORMATION LINK BUTTON
 // AUTHOR: PHILLIP KRAGULJAC
 // CREATED: 2018-04-20
+// MODIFIED: 2018-05-22
 
-function Display_Information_Link_Button($Table_Name, $Input_Name){
+function Display_Information_Link_Button($User_Table_Name, $Input_Name){
 $Info_Data = null;
-$Info_Data = Get_Info_Data_If_Available($Table_Name, $Input_Name);
+$Info_Data = Get_Info_Data_If_Available("Input_Information", $User_Table_Name, $Input_Name);
 
 if($Info_Data != NULL){	
 $Return_String = "";
 // $Link_String = str_replace(" ", "_",substr($Input_Name, 0, -3))."_Item.php?ID=".$Input_Value;
 // if(substr($Input_Name, -3)==" ID"){
-$Return_String = $Return_String."<a href=\"".$Link_String."\">";	
+//$Return_String = $Return_String."<a href=\"".$Link_String."\">";	
 $Return_String = $Return_String."<div class=\"Input_Label_Icon_Circle\">";
 $Return_String = $Return_String."<img class=\"Input_Label_Icon_Image\" src=\"Images\Icons\Info.svg\" title=\"".$Info_Data[0]['Description']."\" alt=\"View\" width=\"16\" height=\"16\">";
 $Return_String = $Return_String."</div>";
-$Return_String = $Return_String."</a>";	
+//$Return_String = $Return_String."</a>";	
 // }
 return $Return_String;
 }
@@ -240,4 +241,31 @@ return $Return_String;
 
 ?>
 
+
+<?php 
+
+// PURPOSE: DISPLAY IMPORTANT INFORMATION LINK BUTTON
+// AUTHOR: PHILLIP KRAGULJAC
+// CREATED: 2018-05-22
+// MODIFIED: 2018-05-22
+
+function Display_Important_Link_Button($User_Table_Name, $Input_Name){
+$Info_Data = null;
+$Info_Data = Get_Info_Data_If_Available("Input_Important", $User_Table_Name, $Input_Name);
+
+if($Info_Data != NULL){	
+$Return_String = "";
+// $Link_String = str_replace(" ", "_",substr($Input_Name, 0, -3))."_Item.php?ID=".$Input_Value;
+// if(substr($Input_Name, -3)==" ID"){
+//$Return_String = $Return_String."<a href=\"".$Link_String."\">";	
+$Return_String = $Return_String."<div class=\"Input_Label_Icon_Circle\">";
+$Return_String = $Return_String."<img class=\"Input_Label_Icon_Image\" src=\"Images\Icons\Important.svg\" title=\"".$Info_Data[0]['Description']."\" alt=\"View\" width=\"16\" height=\"16\">";
+$Return_String = $Return_String."</div>";
+//$Return_String = $Return_String."</a>";	
+// }
+return $Return_String;
+}
+}
+
+?>
 

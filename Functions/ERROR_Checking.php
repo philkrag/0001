@@ -30,6 +30,12 @@
 // /////////////////////////////////////////////////////////////////////// VERSION CONTROL
 ?>
 
+<html>
+<head>
+<title></title>
+</head>
+<body>
+
 <?php include $_SERVER['DOCUMENT_ROOT'].'/Functions/File_Uploads.php'; ?>
 <?php include $_SERVER['DOCUMENT_ROOT'].'/Functions/Filter_Tools.php'; ?>
 
@@ -51,7 +57,7 @@ function Check_Completion_Required_Dates(){
 
 $Server_Name = "localhost:3306";
 $User_Name = "admin";
-$Password = "password";
+$Password = "admin";
 $Database_Name = "User_Data_Collection";
 
 $MySQL_Connection = new mysqli($Server_Name, $User_Name, $Password, $Database_Name);
@@ -189,14 +195,14 @@ echo "[OVERDUE ERRORS]=> Error:" . $MySQL_Connection->error . "<br>";
 $MySQL_Connection->close();
 //header('Location: ' . $_SERVER['HTTP_REFERER']."#".Basic_Filter_Input($_POST['Dashboard_Indetifier']));
 
-Count_Occurences($MySQL_Connection, "Equipment_Register", "ID");
+//Count_Occurences($MySQL_Connection, "Equipment_Register", "ID");
 
 ?>
 
 <?php } ?>
 
-
-
+</body>
+</html>
 
 
 

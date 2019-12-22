@@ -26,6 +26,7 @@
 // DATE   		|| NAME 					|| MODIFICATION
 // 2018-03-13 	|| Phillip Kraguljac 		|| Released.
 // 2018-04-07 	|| Phillip Kraguljac 		|| Updated - v1.2.
+// 2019-12-15 	|| Phillip Kraguljac 		|| Updated - v1.9.
 
 // /////////////////////////////////////////////////////////////////////// VERSION CONTROL
 ?>
@@ -44,7 +45,7 @@ function Display_Report_Table_Basic($Dashboard_Array){ ?>
 
 $Server_Name = "localhost:3306";
 $User_Name = "admin";
-$Password = "password";
+$Password = "admin";
 $Database_Name = Return_Database($Dashboard_Array['MySQL_Table']);
 
 $MySQL_Connection = new mysqli($Server_Name, $User_Name, $Password, $Database_Name);
@@ -87,6 +88,7 @@ $Deleted_Item_Inset = "";
 if($Dashboard_Array['Include_Deleted_Items']=="No"){
 $Deleted_Item_Inset = " AND ( `Deleted Date` > '".date('Y-m-d')."'
 OR `Deleted Date` = '' 
+OR `Deleted Date` = '0000-00-00' 
 OR `Deleted Date` IS NULL) ";		
 }	
 
@@ -180,21 +182,35 @@ echo "</tr>";
 <?php // COLUMN DATA
 	
 $Column_Sum = null;
-	
 for ($x = 0; $x < count($Extracted_Data); $x++) {
 	
 echo "<tr>";
-$i = 0;
-	
+
+$i = 0;	
 foreach ($Dashboard_Array['Displayed_Columns'] as &$value) {
-if($x==0){$Column_Sum[$i]=0;} 																									// Set default values for summing array
-echo "<td class=\"Report_Main_Value_Cell\" >".$Extracted_Data[$x][$value]."</td>";												// Display current value
-if(is_numeric($Extracted_Data[$x][$value])){$Column_Sum[$i] = $Column_Sum[$i] + $Extracted_Data[$x][$value];}					// Add current value to cumulative value
-$i = $i + 1;
+if($x==0){$Column_Sum[$i]=0;}
+$Class = "Report_Main_Value_Cell";
+$Inset_Value = $Extracted_Data[$x][$value];
+
+
+// SPECIAL FUNCTION - EXTRACT DETAIL FROM EXTERNAL TABLE.
+if(substr($Dashboard_Array['Displayed_Columns'][$i], 0, 8)=="ExtData:"){
+$Tool_Array = explode(":",$Dashboard_Array['Displayed_Columns'][$i]);
+$Table_Item_Index_Heading = $Tool_Array[2];
+$Tool_Array[2] = $Extracted_Data[$x][$Table_Item_Index_Heading];
+$Inset_Value = Retrieve_Detail($Tool_Array);
+}
+
+
+echo "<td class=\"{$Class}\" >".$Inset_Value."</td>";
+if(is_numeric($Extracted_Data[$x][$value])){$Column_Sum[$i] = $Column_Sum[$i] + $Extracted_Data[$x][$value];}
+$i++;
+
 }
 echo "</tr>";
-
-}} 
+$i++;
+}
+} 
 
 ?>
 

@@ -36,6 +36,7 @@
 // PURPOSE: DISPLAY PDF FILE UPLOAD INPUTS
 // AUTHOR: PHILLIP KRAGULJAC
 // CREATED: 2018-03-30
+// CURRENT VERSION: V1.1
 
 function Display_Menu_Items($Input_Array){ 
 
@@ -52,7 +53,7 @@ function Display_Menu_Items($Input_Array){
 <div class="Menu_Heading_Icon_Circle">
 <img class="Menu_Icon_Image" src="Images\Icons\Open-Book.svg" alt="" >
 </div>
-REPORTS
+<?php if(!isset($Input_Array['Heading'])){echo "REPORTS"; }else{ echo $Input_Array['Heading']; } ?>
 </td>		
 </tr>
 
@@ -83,3 +84,5 @@ REPORTS
 } 
 
 ?>
+
+
