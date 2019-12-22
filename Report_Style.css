@@ -1,0 +1,196 @@
+/*
+// /////////////////////////////////////////////////////////////////////// COPYRIGHT NOTICE
+
+// This file is part of Pip-Project Portal.
+
+// Pip-Project Portal is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+
+// Pip-Project Portal is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with Pip-Project.  If not, see <http://www.gnu.org/licenses/>.
+
+// /////////////////////////////////////////////////////////////////////// COPYRIGHT NOTICE
+
+// /////////////////////////////////////////////////////////////////////// VERSION CONTROL
+
+// PAGE CREATED BY: Phillip Kraguljac
+// PAGE CREATED DATE: 2018-03-13
+
+// DATE   		|| NAME 					|| MODIFICATION
+// 2018-03-13 	|| Phillip Kraguljac 		|| Released.
+// 2018-04-07 	|| Phillip Kraguljac 		|| Updated - v1.2.
+// 2018-04-22 	|| Phillip Kraguljac 		|| Complete overhaul.
+// 2019-12-11 	|| Phillip Kraguljac 		|| Updated - v1.9.
+
+// /////////////////////////////////////////////////////////////////////// VERSION CONTROL
+
+*/
+
+body { font-family: Arial, Helvetica, sans-serif; font-size: 13px; 
+
+background: background-size: cover; background-repeat: repeat-x; }
+a:link { color: #0000ff; font-weight: bold; }
+a:visited { color: #0000ff; font-weight: bold; }
+a:hover { color: #ffd633; }
+a:active { color: #ffd633; }
+
+
+/* STANDARD PAGE FORMATS */
+
+.Header_Table { width:100%; background-color:#ffffff;}
+.Header_Row {  }
+.Header_Logo_Cell { text-align: center; }
+.Header_Title_Cell { color:#737373; font-size: 40px; font-weight: bold; }
+.Header_Credential_Cell { }
+
+
+.Content_Table { width:100%; min-height:800px;}
+.Left_Content_Cell { /*background-color:#ffffff;*/ vertical-align:top; text-align:center;}
+.Main_Content_Cell { /*background-color:#ffffff;*/ vertical-align:top; padding-bottom:40px;}
+.Right_Content_Cell { /*background-color:#ffffff;*/ vertical-align:top;}
+
+
+.Footer_Table { width:100%; background-color:#8c8c8c; }
+.Footer_Spacer_Cell {  }
+.Footer_Span { color:#ffffff; text-align:right; }
+.Footer_Icon_Cell { padding: 5px 5px 5px 5px; text-align:center; }
+.Footer_Icon { max-height:50px; max-width:70px;}
+
+
+.Left_Content_Icon { max-width:90px; min-height:20px; }
+.Index_Table { width:100%; background-color:rgba(255, 255, 255, 0.5);}
+.Index_Heading_Cell { background-color:#b3b3b3; color:#ffffff; font-size: 18px; padding-left:10px; background: linear-gradient(180deg, rgba(134,134,134,1) 0%, rgba(205,205,205,1) 30%, rgba(205,205,205,1) 70%, rgba(134,134,134,1) 100%);}
+.Index_Heading_Icon_Cell { background-color:#b3b3b3; content: ' \25CF'; text-align:center;}
+.Index_Heading_Icon_Circle{ display: inline-block;  text-align:center; width: 30px; height: 30px; background: #ffffff; -moz-border-radius: 20px; -webkit-border-radius: 20px; background-image: url(no.png); background-position:50% 50%; background-repeat:no-repeat; }
+.Index_Icon_Image { padding-top:3px; height:20px; width:20px; }
+.Index_Icon_Cell { background-color:#f2f2f2; padding: 5px 0px 5px 0px; vertical-align:Top; text-align:center;}
+.Index_Link_Cell { background-color:#ffffff; vertical-align:Top; }
+.Index_Label_Cell { background-color:#f2f2f2; color: #595959; padding: 5px 5px 5px 20px; vertical-align:Top; font-weight:bold; }
+.Index_Information_Cell { background-color:#f9f9f9; padding: 5px 5px 5px 5px; vertical-align:Top; }
+.Index_Spacer_Cell { Height:12px; }
+
+
+.Legend_Table { width:100%; /*background-color:#ffffff;*/ padding-top:80px;}
+.Legend_Spacer_Cell {  }
+.Legend_Heading_Cell { background-color:#cccccc; color:#8c8c8c; font-weight: bold;}
+.Legend_Icon_Cell { background-color:#f2f2f2; padding: 5px 0px 5px 0px; vertical-align:Top; text-align:center; }
+.Legend_Information_Cell { background-color:#f2f2f2; padding: 5px 5px 5px 5px; vertical-align:Top; }
+
+
+.User_Login_Table { width:100%; background-color:#f2f2f2; border: 1px solid black;}
+.User_Login_Button_Cell { background-color:#f2f2f2; vertical-align:Top;}
+.User_Login_Label_Cell { background-color:#f2f2f2; }
+.User_Login_Value_Cell { background-color:#f2f2f2; }
+.User_Login_Icon_Cell { background-color:#b3b3b3; }
+.User_Login_Spacer_Cell { background-color:#f2f2f2; }
+
+
+.Menu_Table { width:100%; background-color:#ffffff; }
+.Menu_Heading_Cell { background-color:#b3b3b3; color:#ffffff; font-size: 18px; padding-left:10px; background: linear-gradient(180deg, rgba(134,134,134,1) 0%, rgba(205,205,205,1) 30%, rgba(205,205,205,1) 70%, rgba(134,134,134,1) 100%);}
+.Menu_Heading_Icon_Cell { background-color:#b3b3b3; content: ' \25CF'; text-align:center;}
+.Menu_Heading_Icon_Circle{display: inline-block;  text-align:center; width: 25px; height: 25px; background: #ffffff; -moz-border-radius: 10px; -webkit-border-radius: 10px; background-image: url(no.png); background-position:15% 15%; background-repeat:no-repeat; }
+.Menu_Icon_Image { padding-top:3px; height:20px; width:20px; }
+.Menu_Description_Cell { background-color:#f2f2f2;}
+.Menu_Submit_Cell { background-color:White; }
+
+
+.Dashboard_Table { width:100%; background-color:#ffffff;}
+.Dashboard_Heading_Cell { background-color:#b3b3b3; color:#ffffff; font-size: 18px; padding-left:10px; background: linear-gradient(180deg, rgba(134,134,134,1) 0%, rgba(205,205,205,1) 30%, rgba(205,205,205,1) 70%, rgba(134,134,134,1) 100%);}
+.Dashboard_Heading_Icon_Cell { background-color:#b3b3b3; content: ' \25CF'; text-align:center;}
+.Dashboard_Heading_Icon_Circle{ display: inline-block;  text-align:center; width: 30px; height: 30px; background: #ffffff; -moz-border-radius: 20px; -webkit-border-radius: 20px; background-image: url(no.png); background-position:50% 50%; background-repeat:no-repeat; }
+.Dashboard_Icon_Image { padding-top:3px; height:20px; width:20px; }
+.Dashboard_SubHeading_Cell { background-color:#cccccc; font-weight: bold; height:20px;}
+.Dashboard_Button_Cell { background-color:#ffffff; vertical-align:Top; text-align:center;}
+.Dashboard_Label_Cell { background-color:#f2f2f2; vertical-align:Top; }
+.Dashboard_Value_Cell { background-color:#f9f9f9; vertical-align:Top; }
+.Dashboard_Value_Cell_Highlight { background-color:#fff78c; }
+.Dashboard_Value_Cell_Icon { background-color:#f2f2f2; }
+.Dashboard_Value_Cell_Warning { background-color:#fff78c; color:#000000; text-align:center; font-weight: bold; }
+.Dashboard_Value_Cell_Overdue { background-color:#ff8c8c; color:#ffffff; text-align:center; font-weight: bold; }
+.Dashboard_Value_Cell_Test { background-color:Purple; }
+.Dashboard_Footnote_Cell { background-color:#ffffff; }
+.Dashboard_Spacer_Cell { background-color:#ffffff; }
+.Dashboard_Spacer_Tools { width: 0; height: 0; border-bottom: 25px solid transparent; border-right: 80px solid #f2f2f2; }
+.Dashboard_Button { width:100%; }
+.Dashboard_Table_Spacer_Cell { background-color:#ffffff; }
+
+.Input_Table { width:100%; background-color:#ffffff; }
+.Input_Heading_Cell { background-color:#b3b3b3; color:#ffffff; font-size: 18px; padding-left:10px; background: linear-gradient(180deg, rgba(134,134,134,1) 0%, rgba(205,205,205,1) 30%, rgba(205,205,205,1) 70%, rgba(134,134,134,1) 100%);}
+.Input_Heading_Icon_Cell { background-color:#b3b3b3; content: ' \25CF'; text-align:center; }
+.Input_Heading_Icon_Circle{display: inline-block;  text-align:center; width: 20px; height: 20px; background: #ffffff; -moz-border-radius: 10px; -webkit-border-radius: 10px; background-image: url(no.png); background-position:15% 15%; background-repeat:no-repeat;}
+.Input_Label_Cell { background-color:#f2f2f2; vertical-align:top; padding-top:4px;}
+.Input_Label_Icon_Cell { background-color:#b3b3b3; content: ' \25CF'; text-align:center;}
+.Input_Label_Icon_Circle{display: inline-block; float:right; width: 20px; height: 20px; background: #ffffff; -moz-border-radius: 10px; -webkit-border-radius: 10px; background-image: url(no.png); background-position:15% 15%; background-repeat:no-repeat; }
+.Input_Label_Icon_Image { padding: 2px 2px 2px 2px; height:16px; width:16px; }
+.Input_Value_Cell { background-color:#f9f9f9; }
+.Input_Spacer_Cell {  }
+.Inputs_Text { width:99%; }
+.Inputs_Text_Area { width:99%; height: 80px; }
+.Inputs_ComboBox { width:99.6%; }
+
+
+.Tool_Table { width:100%; background-color:#f2f2f2; }
+.Tool_Cell { }
+.Tool_Spacer_Cell {  }
+.Tool_Button_Cell {  }
+.Tool_Button { width:100%; }
+
+
+.Upper_Warning_Cell {background-color:#ffffff; text-align:center;}
+.Upper_Submit_Table { width:100%; background-color:White; }
+.Upper_Submit_Cell { background-color:White; }
+.Upper_Submit_Spacer_Cell { background-color:White; }
+.Upper_Submit_Button { width:100%; }
+
+
+.Lower_Submit_Table { width:100%; background-color:White; }
+.Lower_Submit_Cell { background-color:White; text-align:Right;}
+.Lower_Submit_Spacer_Cell { background-color:White; }
+.Lower_Submit_Button { width:100%; }
+.Lower_Delete_Button { width:100%; background-color:Red; color: #ffffff;}
+
+
+/* REPORT FORMATS */
+
+.Report_Header_Table { width:100%; }
+.Report_Header_Row {  }
+.Report_Header_Logo_Cell { }
+.Report_Header_Title_Cell { }
+.Report_Header_Label_Cell { }
+.Report_Header_Heading_Cell { }
+
+
+.Report_Content_Table { width:100%; background-color:Black; }
+.Report_Main_Content_Cell {  }
+.Report_Main_Heading_Cell { background-color:White; height:30px; vertical-align:bottom; font-size: 18px; font-weight: bold; }
+.Report_Main_SubHeading_Cell { background-color:White; font-weight: bold; vertical-align:top;  }
+.Report_Main_Label_Cell {  background-color:White; vertical-align:top; padding: 5px 5px 5px 5px; }
+.Report_Main_Value_Cell { background-color:White; white-space: pre-line; vertical-align:top; padding: 5px 5px 5px 5px; }
+.Report_Main_Empty_Cell {
+background: repeating-linear-gradient(
+  45deg,
+  #000000,
+  #000000 1px,
+  #ffffff 1px,
+  #ffffff 4px
+);}
+.Report_Main_Sign_Cell { background-color:White; height:40px; font-weight: bold; vertical-align:top; }
+
+
+.Report_Footer_Table { width:100%; }
+.Report_Footer_Line_Spacer_Cell { height:10px; }
+.Report_Pip_Logo_Cell { height:10px; }
+.Report_Pip_Text_Cell { height:10px; }
+.Report_Footer_Spacer_Cell {  }
+.Report_Footer_CopyRight_Cell { text-align:right; }
+
+
+
+
