@@ -25,7 +25,9 @@
 
 // DATE   		|| NAME 					|| MODIFICATION
 // 2018-03-13 	|| Phillip Kraguljac 		|| Released.
-// 2018-04-07 	|| Phillip Kraguljac 		|| Updated - v1.2.
+// 2018-04-07 	|| Phillip Kraguljac 		|| v1.2.
+// 2018-04-22 	|| Phillip Kraguljac 		|| Added Risk Database.
+// 2019-12-22 	|| Phillip Kraguljac 		|| v1.9.
 
 // /////////////////////////////////////////////////////////////////////// VERSION CONTROL
 
@@ -42,13 +44,51 @@ $ID=null; if(isset($_GET['ID'])){$ID=$_GET['ID'];}
 ?>
 
 
+<?php // BASIC MENU V1.1
+
+$Input_Array['Heading'] = "TOOLS";
+
+$Input_Array['ID'] = $ID;
+
+$Input_Array['Item_Description'] = array(
+"Risk Assessment Tool [under construction]"
+
+);
+
+$Input_Array['Item_Link'] = array(
+"Risk_Checklist.php"
+);
+
+Display_Menu_Items($Input_Array); // <<< RESOURCE 0001
+
+?>
+
+
+<?php // BASIC MENU V1.1
+
+$Input_Array['Heading'] = "REPORTS";
+
+$Input_Array['ID'] = $ID;
+
+$Input_Array['Item_Description'] = array(
+"Risk Assessment Report [under construction]"
+
+);
+
+$Input_Array['Item_Link'] = array(
+"Reports/Risk_Assessment_Hazard_Report.php"
+);
+
+Display_Menu_Items($Input_Array); // <<< RESOURCE 0001
+
+?>
+
+
 <?php // BASIC INPUT V1.0
 
 $Input_Array['Title'] = "EQUIPMENT REGISTER ITEM";
 $Input_Array['Dashboard_Indetifier'] = "I001";
 $Input_Array['ID'] = $ID;
-
-
 
 $Input_Array['Column_Headings'] = array(
 "ID",
@@ -272,6 +312,40 @@ $Dashboard_Array['Include_Warnings'] = "Yes";
 
 $Dashboard_Array['MySQL_Action'] = "SELECT * ";
 $Dashboard_Array['MySQL_Table'] = "FROM Task_Record ";
+$Dashboard_Array['MySQL_Filter'] = "WHERE `ID` IS NOT NULL AND `Equipment Register ID` = '{$ID}'";
+$Dashboard_Array['MySQL_Order'] = "ORDER BY `ID` ASC ";
+$Dashboard_Array['MySQL_Limit'] = "LIMIT {$Dashboard_Array['Dashboard_Limit']} ";
+$Dashboard_Array['MySQL_Offset'] = "OFFSET {$Dashboard_Array['Dashboard_Offset']}";
+
+$Dashboard_Array['Display_Item_Photos'] = "Yes";
+$Dashboard_Array['Allow_New_Items'] = "Yes";
+$Dashboard_Array['Include_Deleted_Items'] = "No";
+
+Display_Dashboard_Basic($Dashboard_Array); // <<< RESOURCE 0001
+
+?>
+
+
+<?php // BASIC DASHBOARD V1.5
+
+$Dashboard_Array['Title'] = "RISK(S)";
+$Dashboard_Array['Dashboard_Indentifier'] = "D007";
+$Dashboard_Array['Item_Link'] = "Risk_Record_Item.php";
+$Dashboard_Array['Item_Link_Concurrent'] = "&Equipment_Register_ID={$ID}";
+$Dashboard_Array['Dashboard_Offset'] = Retrieve_Offset($_GET, $Dashboard_Array['Dashboard_Indentifier']); // <<< RESOURCE 0002
+$Dashboard_Array['Dashboard_Limit'] = 5;
+
+$Dashboard_Array['Column_Headings'] = array("ID", "Description", "Status"); // Recommended x3 minimum (when images used).
+$Dashboard_Array['Displayed_Columns'] = array("ID", "Description", "Status"); // Recommended x3 minimum (when images used).
+$Dashboard_Array['Highlight_Columns'] = array();
+
+$Dashboard_Array['New_Item_Link_Headings'] = array("Equipment_Register_ID");
+$Dashboard_Array['New_Item_Link_Values'] = array("{$ID}");
+
+$Dashboard_Array['Include_Warnings'] = "Yes";
+
+$Dashboard_Array['MySQL_Action'] = "SELECT * ";
+$Dashboard_Array['MySQL_Table'] = "FROM Risk_Record ";
 $Dashboard_Array['MySQL_Filter'] = "WHERE `ID` IS NOT NULL AND `Equipment Register ID` = '{$ID}'";
 $Dashboard_Array['MySQL_Order'] = "ORDER BY `ID` ASC ";
 $Dashboard_Array['MySQL_Limit'] = "LIMIT {$Dashboard_Array['Dashboard_Limit']} ";

@@ -1,3 +1,54 @@
+
+
+
+///////////////////////////////////////////////////////////
+
+VERSION 1.8
+IMPROVEMENTS:
+=> Adjusted the CSS file.
+=> Adjust formatting of main footer.
+=> Added OSI Logo and Link.
+=> Added public domain warning to footer.
+=> Added service record update functionality.
+=> Input information data added.
+=> Input important information function added.
+=> Input important information data added.
+=> Adjusted formatting of value cells.
+=> Adjusted formatting of main menu information cell.
+=> Modified option labels.
+=> Opened NEW item option in Project Register.
+
+FIXES:
+=> Login fault - due to filtering changes (uploading direct to main).
+
+
+///////////////////////////////////////////////////////////
+
+VERSION 1.7
+IMPROVEMENTS:
+=> 
+
+FIXES:
+=> Issues with Githib Transfer.
+
+///////////////////////////////////////////////////////////
+
+VERSION 1.6
+IMPROVEMENTS:
+=> 
+
+FIXES:
+=> Test Commit.
+
+///////////////////////////////////////////////////////////
+
+VERSION 1.5
+IMPROVEMENTS:
+=> 
+
+FIXES:
+=> Test Commit.
+
 ///////////////////////////////////////////////////////////
 
 VERSION 1.4

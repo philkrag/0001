@@ -26,6 +26,8 @@
 // DATE   		|| NAME 					|| MODIFICATION
 // 2018-03-13 	|| Phillip Kraguljac 		|| Released.
 // 2018-04-07 	|| Phillip Kraguljac 		|| Updated - v1.2.
+// 2018-04-22 	|| Phillip Kraguljac 		|| Changed Warning Icon class.
+// 2019-12-21 	|| Phillip Kraguljac 		|| v1.9.
 
 // /////////////////////////////////////////////////////////////////////// VERSION CONTROL
 ?>
@@ -36,13 +38,16 @@
 // AUTHOR: PHILLIP KRAGULJAC
 // CREATED: 2018-03-12
 
+// v1.4 || .
+// v1.5 || 2019-12-21
+
 function Display_Dashboard_Basic($Dashboard_Array){ ?>
 
 <?php // CONNECT TO MYSQL DATABASE
 
 $Server_Name = "localhost:3306";
 $User_Name = "admin";
-$Password = "password";
+$Password = "admin";
 $Database_Name = Return_Database($Dashboard_Array['MySQL_Table']);
 
 $MySQL_Connection = new mysqli($Server_Name, $User_Name, $Password, $Database_Name);
@@ -58,7 +63,7 @@ if ($MySQL_Connection->connect_error) {die("Connection failed: " . $MySQL_Connec
 $i = 0;
 	
 $MySQL_Command_Script = "SELECT COLUMN_NAME, DATA_TYPE 
-FROM INFORMATION_SCHEMA.COLUMNS
+FROM information_schema.COLUMNS
 WHERE `TABLE_SCHEMA`='{$Database_Name}' 
 AND `TABLE_NAME`='{$Table_Name}';";
 
@@ -74,11 +79,9 @@ if ($MySQL_Result->num_rows > 0) {
 } else {
     
 }
-	// var_dump($Column_Data);
+	//var_dump($Column_Data);
 	echo "<br>";
 	?>
-	
-	
 	
 	
 <?php // EXTRACT DATABASE DATA TO VARIABLE
@@ -88,6 +91,7 @@ $Deleted_Item_Inset = "";
 if($Dashboard_Array['Include_Deleted_Items']=="No"){
 $Deleted_Item_Inset = " AND ( `Deleted Date` > '".date('Y-m-d')."'
 OR `Deleted Date` = '' 
+OR `Deleted Date` = '0000-00-00' 
 OR `Deleted Date` IS NULL) ";		
 }	
 	
@@ -108,40 +112,34 @@ if ($MySQL_Result->num_rows > 0) {
 while($row = $MySQL_Result->fetch_assoc()) {
 
 for ($x = 0; $x <= count($Column_Data); $x++) {
-	if(isset($Column_Data[$x]['Name'])){
+if(isset($Column_Data[$x]['Name'])){
 $Extracted_Data[$i][$Column_Data[$x]['Name']] = $row[$Column_Data[$x]['Name']];
-	}
+}
 } 
 $i = $i + 1;
 }	
 } else {
-//echo "0 results";
+echo "0 results";
 }
 
 //echo $Extracted_Data[0]['Basic Text'];	
 
-	?>
-	
-	<?php
-	
-	$MySQL_Connection->close();
-	
-	?>
-	
-	
-	
-	
-	<?php // GET TABLE NAME ONLY
+?>
+
+
+<?php
+
+$MySQL_Connection->close();
+
+?>
+
+
+<?php // GET TABLE NAME ONLY
 
 $Table_Name = str_replace("FROM","",$Dashboard_Array['MySQL_Table']);
 $Table_Name = str_replace(" ","",$Table_Name);
 
 ?>
-	
-
-
-
-	
 	
 	
 <?php // INCLUDED DELETE ITEM NOTIFICATION
@@ -162,12 +160,11 @@ if($Dashboard_Array['Include_Deleted_Items']=="Yes"){$Deleted_Item_Heading_Inset
 </tr>
 
 
-
 <form action="Functions/Database_Modify.php" method="post">
 
 <input type="hidden" name="Method" value="New">
 <input type="hidden" name="Table" value="<?php echo $Table_Name; ?>">
-<?php for($x = 0; $x < 1; $x++) { ?><input type="hidden" name="<?php if(isset($Dashboard_Array['New_Item_Link_Headings'][$x])){ echo $Dashboard_Array['New_Item_Link_Headings'][$x];} ?>" value="<?php echo $Dashboard_Array['New_Item_Link_Values'][$x]; ?>"><?php } ?>
+<?php for($x = 0; $x < 2; $x++) { ?><input type="hidden" name="<?php if(isset($Dashboard_Array['New_Item_Link_Headings'][$x])){ echo $Dashboard_Array['New_Item_Link_Headings'][$x];} ?>" value="<?php echo $Dashboard_Array['New_Item_Link_Values'][$x]; ?>"><?php } ?>
 <input type="hidden" name="Dashboard_Indetifier" value="<?php echo $Dashboard_Array['Dashboard_Indentifier']; ?>">
 
 <?php if($_SESSION['Logged_In_User']&&$_SESSION['Adjust_Inputs']=="Yes"&&$Dashboard_Array['Allow_New_Items']=="Yes"){ ?>
@@ -192,7 +189,7 @@ for ($x = 0; $x < count($Extracted_Data); $x++) {
 <tr>
 <td class="Dashboard_Button_Cell" rowspan="<?php echo (count($Dashboard_Array['Column_Headings'])+1); ?>">
 
-<?php $Edit_Button_Link = $Dashboard_Array['Item_Link']."?ID=".$Extracted_Data[$x]['ID']; ?>
+<?php $Edit_Button_Link = $Dashboard_Array['Item_Link']."?ID=".$Extracted_Data[$x]['ID'].$Dashboard_Array['Item_Link_Concurrent']; ?>
 <button class="Dashboard_Button" onclick="window.location.href='<?php echo $Edit_Button_Link; ?>'">View</button>
 
 <?php if($Dashboard_Array['Display_Item_Photos'] == "Yes"){ 
@@ -224,12 +221,24 @@ if($Extracted_Data[$x]['Last Modified Date']==date("Y-m-d")){$Icon_Inset = $Icon
 $i = 0;
 foreach ($Dashboard_Array['Displayed_Columns'] as &$value) {
 $Class = "Dashboard_Value_Cell";
-//if($Extracted_Data[$x]['Last Modified Date']==date("Y-m-d")){$Class = "Dashboard_Value_Cell_Highlight";}
+$Inset_Value = $Extracted_Data[$x][$value];
+
+
+// SPECIAL FUNCTION - EXTRACT DETAIL FROM EXTERNAL TABLE.
+if(substr($Dashboard_Array['Displayed_Columns'][$i], 0, 8)=="ExtData:"){
+$Tool_Array = explode(":",$Dashboard_Array['Displayed_Columns'][$i]);
+$Table_Item_Index_Heading = $Tool_Array[2];
+$Tool_Array[2] = $Extracted_Data[$x][$Table_Item_Index_Heading];
+$Inset_Value = Retrieve_Detail($Tool_Array);
+}
+
+
 echo "<tr>";
 echo "<td class=\"Dashboard_Label_Cell\" >".$Dashboard_Array['Column_Headings'][$i]."</td>";
-echo "<td class=\"{$Class}\" >".$Extracted_Data[$x][$value]."</td>";
+echo "<td class=\"{$Class}\" >".$Inset_Value."</td>";
 echo "</tr>";
-$i = $i + 1;
+$i++;
+
 }
 
 ?>
@@ -238,14 +247,14 @@ $i = $i + 1;
 <?php if($Dashboard_Array['Include_Warnings'] == "Yes" && ($Extracted_Data[$x]['Warning ERRORS']>0 || $Extracted_Data[$x]['Overdue ERRORS']>0)){ ?>
 <tr>
 <td class="Dashboard_Spacer_Tools" colspan="1"></td>
-<td class="" style="background-color:#f2f2f2;" colspan="2">
+<td class="Dashboard_Warning_Cell" style="" colspan="2">
 
 <table class="">
 <col width="">
 <col width="">
 <tr>
-<td class="Dashboard_Value_Cell"><img src="Images\Icons\Warning.svg" alt="" width="20" height="20"></td>
-<td class="Dashboard_Value_Cell"><img src="Images\Icons\Siren.svg" alt="" width="20" height="20"></td>
+<td class="Dashboard_Value_Cell_Icon"><img src="Images\Icons\Warning.svg" alt="" width="20" height="20"></td>
+<td class="Dashboard_Value_Cell_Icon"><img src="Images\Icons\Siren.svg" alt="" width="20" height="20"></td>
 </tr>
 <tr>
 <td class="Dashboard_Value_Cell_Warning"><?php echo $Extracted_Data[$x]['Warning ERRORS']; ?></td>
@@ -256,9 +265,6 @@ $i = $i + 1;
 </td>
 </tr>
 <?php } ?>
-
-
-<tr><td style="height:2px" colspan="2"></td></tr>
 
 <?php }} ?>
 

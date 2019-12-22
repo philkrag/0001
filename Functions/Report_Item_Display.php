@@ -43,7 +43,7 @@ function Display_Report_Item_Basic($Input_Array){ ?>
 
 $Server_Name = "localhost:3306";
 $User_Name = "admin";
-$Password = "password";
+$Password = "admin";
 $Database_Name = Return_Database($Input_Array['MySQL_Table']);
 
 $MySQL_Connection = new mysqli($Server_Name, $User_Name, $Password, $Database_Name);

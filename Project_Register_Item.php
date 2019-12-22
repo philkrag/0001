@@ -26,6 +26,7 @@
 // DATE   		|| NAME 					|| MODIFICATION
 // 2018-03-13 	|| Phillip Kraguljac 		|| Released.
 // 2018-04-07 	|| Phillip Kraguljac 		|| Updated - v1.2.
+// 2018-04-22 	|| Phillip Kraguljac 		|| Changed risk dashboard new item setting - Yes.
 
 // /////////////////////////////////////////////////////////////////////// VERSION CONTROL
 ?>
@@ -355,7 +356,7 @@ $Dashboard_Array['MySQL_Limit'] = "LIMIT {$Dashboard_Array['Dashboard_Limit']} "
 $Dashboard_Array['MySQL_Offset'] = "OFFSET {$Dashboard_Array['Dashboard_Offset']}";
 
 $Dashboard_Array['Display_Item_Photos'] = "No";
-$Dashboard_Array['Allow_New_Items'] = "No";
+$Dashboard_Array['Allow_New_Items'] = "Yes";
 $Dashboard_Array['Include_Deleted_Items'] = "No";
 
 Display_Dashboard_Basic($Dashboard_Array); // <<< RESOURCE 0001

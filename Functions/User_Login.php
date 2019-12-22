@@ -30,6 +30,7 @@ along with Pip-Project.  If not, see <http://www.gnu.org/licenses/>.
 // DATE   		|| NAME 					|| MODIFICATION
 // 2018-03-18 	|| Phillip Kraguljac 		|| Released.
 // 2018-04-07 	|| Phillip Kraguljac 		|| Updated - v1.2.
+// 2019-12-18 	|| Phillip Kraguljac 		|| Updated - v1.9.
 
 // /////////////////////////////////////////////////////////////////////// VERSION CONTROL
 ?>
@@ -40,7 +41,7 @@ along with Pip-Project.  If not, see <http://www.gnu.org/licenses/>.
 
 $Server_Name = "localhost:3306";
 $User_Name = "admin";
-$Password = "password";
+$Password = "admin";
 $Database_Name = "User_Configuration";
 
 $MySQL_Connection = new mysqli($Server_Name, $User_Name, $Password, $Database_Name);
@@ -90,6 +91,7 @@ $Entry_Detected = false;
 while($row = $MySQL_Result->fetch_assoc()) {
 	$_SESSION['Adjust_Inputs'] = Basic_Filter_Input($row['Adjust Inputs?']);
 	$_SESSION['Display_Connectivity'] = Basic_Filter_Input($row['Display Connectivity?']);		
+	$_SESSION['CSS_Format'] = Basic_Filter_Input($row['CSS Format']);
 	$Entry_Detected = true;
 }
 

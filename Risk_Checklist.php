@@ -14,22 +14,19 @@
 // GNU General Public License for more details.
 
 // You should have received a copy of the GNU General Public License
-// along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
+// along with Pip-Project.  If not, see <http://www.gnu.org/licenses/>.
 
 // /////////////////////////////////////////////////////////////////////// COPYRIGHT NOTICE
 
 // /////////////////////////////////////////////////////////////////////// VERSION CONTROL
 
 // PAGE CREATED BY: Phillip Kraguljac
-// PAGE CREATED DATE: 2018-03-29
+// PAGE CREATED DATE: 2019-12-15
 
 // DATE   		|| NAME 					|| MODIFICATION
-// 2018-03-13 	|| Phillip Kraguljac 		|| Released.
-// 2018-04-07 	|| Phillip Kraguljac 		|| v1.2.
-// 2019-12-18 	|| Phillip Kraguljac 		|| v1.9.
+// 2019-12-15 	|| Phillip Kraguljac 		|| Released.
 
 // /////////////////////////////////////////////////////////////////////// VERSION CONTROL
-
 ?>
 
 
@@ -45,39 +42,44 @@ $ID=null; if(isset($_GET['ID'])){$ID=$_GET['ID'];}
 
 <?php // BASIC INPUT V1.0
 
-$Input_Array['Title'] = "USER(S) REGISTER ITEM";
+$Input_Array['Title'] = "RISK RECORD ITEM";
 $Input_Array['Dashboard_Indetifier'] = "I001";
 $Input_Array['ID'] = $ID;
 
-$Input_Array['Column_Headings'] = array(
-"ID",
-"User Name",
-"Password",
-"Adjust Inputs?",
-"CSS Format"
+// $Input_Array['Column_Headings'] = array(
+// "ID",
+// "Project Register ID",
+// "Chemical Register ID",
+// "Description",
+// "Status",
+// "Deleted Date",
+// "Last Modified Date",
+// "Last Modified Time",
+// "Last Modified by User"
+// );
+
+$Input_Array['Displayed_Questions'] = array(
+"Acceleration / deceleration hazard",
+"Temperature hazard",
+"Pressure hazard",
+"Chemical Register ID"
 );
 
-$Input_Array['Displayed_Columns'] = array(
-"ID",
-"User Name",
-"Password",
-"Adjust Inputs?",
-"CSS Format"
-);
-
-$Input_Array['Highlight_Columns'] = array(
-);
+$Input_Array['Highlight_Columns'] = array(null, null);
 
 $Input_Array['MySQL_Action'] = "SELECT * ";
-$Input_Array['MySQL_Table'] = "FROM User_Details ";
+$Input_Array['MySQL_Table'] = "FROM Risk_Record ";
 $Input_Array['MySQL_Filter'] = "WHERE `ID` = {$ID} ";
 $Input_Array['MySQL_Order'] = "";
 $Input_Array['MySQL_Limit'] = "LIMIT 1";
 $Input_Array['MySQL_Offset'] = "";
 
-Display_Input_Basic($Input_Array); // <<< RESOURCE 0001
+Display_Input_Checklist($Input_Array); // <<< RESOURCE 0001
 
 ?>
+
+
+
 
 
 <?php Display_Item_Page_Legend(); ?>

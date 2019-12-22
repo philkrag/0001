@@ -36,7 +36,7 @@ $Combobox_Data = null;
 
 $Server_Name = "localhost:3306";
 $User_Name = "admin";
-$Password = "password";
+$Password = "admin";
 $Database_Name = "System_Configuration";
 
 $MySQL_Connection = new mysqli($Server_Name, $User_Name, $Password, $Database_Name);
@@ -73,7 +73,7 @@ $More_Information_Inset = "";  if($Combobox_Data[$x]['Description']!=Null){$More
 
 ?>
 
-<option value="<?php echo str_replace(" ", "_", $Combobox_Data[$x]['Option']); ?>" <?php echo $Selectable_Inset; ?>><?php echo "[".strtoupper($Combobox_Data[$x]['Option'])."]".$More_Information_Inset; ?></option>
+<option style="background-color:rgba(50, 50, 50, 1.0); border-color:rgba(255, 255, 255, 1.0);" value="<?php echo str_replace(" ", "_", $Combobox_Data[$x]['Option']); ?>" <?php echo $Selectable_Inset; ?>><?php echo "[".strtoupper($Combobox_Data[$x]['Option'])."]".$More_Information_Inset; ?></option>
 <?php } ?>
 </select>
 

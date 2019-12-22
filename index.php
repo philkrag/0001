@@ -25,7 +25,10 @@
 
 // DATE   		|| NAME 					|| MODIFICATION
 // 2018-03-13 	|| Phillip Kraguljac 		|| Released.
-// 2018-04-07 	|| Phillip Kraguljac 		|| Updated - v1.2.
+// 2018-04-07 	|| Phillip Kraguljac 		|| v1.2.
+// 2018-04-22 	|| Phillip Kraguljac 		|| Added incident recording option.
+// 2018-05-11 	|| Phillip Kraguljac 		|| v1.8
+// 2019-12-22 	|| Phillip Kraguljac 		|| v1.9.
 
 // /////////////////////////////////////////////////////////////////////// VERSION CONTROL
 ?>
@@ -165,6 +168,24 @@ PARTS
 <div class="Index_Heading_Icon_Circle">
 <img class="Index_Icon_Image" src="Images\Icons\Folders.svg" alt="" >
 </div>
+RISK CONTROL
+</td>		
+</tr>
+
+<tr>
+<?php $Link = "Control_Register.php"; $Get_Data = ""; ?>
+<td class="Index_Link_Cell"><button class="Tool_Button" onclick="window.location.href='<?php echo $Link.$Get_Data; ?>'">View</button></td>
+<td class="Index_Label_Cell"><?php echo Check_Link($Link); ?> Control Measures</td>
+<td class="Index_Information_Cell">The following section allows you to create standardised risk control measures.</td>
+</tr>
+
+<tr><td class="Index_Spacer_Cell" colspan="3"></td></tr>
+
+<tr>
+<td class="Index_Heading_Cell" colspan="3">
+<div class="Index_Heading_Icon_Circle">
+<img class="Index_Icon_Image" src="Images\Icons\Folders.svg" alt="" >
+</div>
 PROJECTS
 </td>		
 </tr>
@@ -182,14 +203,14 @@ PROJECTS
 <div class="Index_Heading_Icon_Circle">
 <img class="Index_Icon_Image" src="Images\Icons\Folders.svg" alt="" >
 </div>
-SAEFTY
+SAFETY
 </td>		
 </tr>
 
 <tr>
 <?php $Link = "Incident_Record.php"; $Get_Data = ""; ?>
 <td class="Index_Link_Cell"><button class="Tool_Button" onclick="window.location.href='<?php echo $Link.$Get_Data; ?>'">View</button></td>
-<td class="Index_Label_Cell"><?php echo Check_Link($Link); ?> Incident Investigations</td>
+<td class="Index_Label_Cell"><?php echo Check_Link($Link); ?> Incident Register</td>
 <td class="Index_Information_Cell">This section lists all of the incident reports currently active at your site.</td>
 </tr>
 
@@ -207,22 +228,6 @@ SAEFTY
 <td class="Index_Information_Cell">This section will list all of your current Standard Operating Procedures.</td>
 </tr>
 
-
-<!--<tr>
-<td class="Index_Heading_Cell" colspan="3">
-<div class="Index_Heading_Icon_Circle">
-<img class="Index_Icon_Image" src="Images\Icons\Folders.svg" alt="" >
-</div>
-WORK METHOD STATEMENT (WMS) DOCUMENTATION
-</td>		
-</tr>
-
-<tr>
-<?php $Link = ""; $Get_Data = ""; ?>
-<td class="Index_Link_Cell"><a href="<?php echo $Link.$Get_Data; ?>"><?php Check_Link($Link); ?>WMS Register</a></td>
-<td class="Index_Information_Cell">This section will list all of your current Work Method Statements.</td>
-</tr>-->
-
 <tr><td class="Index_Spacer_Cell" colspan="3"></td></tr>
 
 <tr>
@@ -235,27 +240,11 @@ TOOLS
 </tr>
 
 <tr>
-<?php $Link = "Functions\ERROR_Checking.php"; $Get_Data = ""; ?>
+<?php $Link = "Support_Menu.php"; $Get_Data = ""; ?>
 <td class="Index_Link_Cell"><button class="Tool_Button" onclick="window.location.href='<?php echo $Link.$Get_Data; ?>'">View</button></td>
-<td class="Index_Label_Cell"><?php echo Check_Link($Link); ?> Run Scan </td>
+<td class="Index_Label_Cell"><?php echo Check_Link($Link); ?> System Support Menu </td>
 <td class="Index_Information_Cell">=>Insert Description Here<=</td>
 </tr>
-
-<tr>
-<?php $Link = "System_Configuration.php"; $Get_Data = ""; ?>
-<td class="Index_Link_Cell"><button class="Tool_Button" onclick="window.location.href='<?php echo $Link.$Get_Data; ?>'">View</button></td>
-<td class="Index_Label_Cell"><?php echo Check_Link($Link); ?> System Configuration</td>
-<td class="Index_Information_Cell">=>Insert Description Here<=</td>
-</tr>
-
-<?php if($_SESSION['Logged_In_User']=="admin"){ ?>
-<tr>
-<?php $Link = "User_Register.php"; $Get_Data = ""; ?>
-<td class="Index_Link_Cell"><button class="Tool_Button" onclick="window.location.href='<?php echo $Link.$Get_Data; ?>'">View</button></td>
-<td class="Index_Label_Cell"><?php echo Check_Link($Link); ?> User Configuration</td>
-<td class="Index_Information_Cell">=>Insert Description Here<=</td>
-</tr>
-<?php } ?>
 
 </table>
 
